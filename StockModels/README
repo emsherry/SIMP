@@ -1,0 +1,6 @@
+This code uses a LSTM neural network to predict stock prices. It loads historical stock price data for a specific company, preprocesses
+the data, trains the LSTM model, and then uses the trained model to make predictions on test data. Finally, it plots the predicted prices
+against the actual prices and outputs the predicted prices for the next 5 days. 
+
+To use this code, you need to have historical stock price data in a CSV file, and you need to change the "company" variable to match the company whose stock
+prices you are trying to predict. You can also change the number of days used for prediction by modifying the "prediction_days" variable.
