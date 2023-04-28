@@ -1,0 +1,69 @@
+
+
+
+
+### database 1:
+users information
+     - auth
+        > email_unique
+        > username_pk
+        > password_enc
+        > last_updated
+     - info
+        > usr_id_pk
+        > username_unique
+        > f_name
+        > l_name
+        > email
+        > dob
+        > address
+        > last_updated
+     - wallet
+        > usr_id
+        > wallet_id
+        > curr_bal
+        > is_locked?
+        > last_updated
+
+
+### database 2:
+stocks information
+     - active_companies
+        > company_id
+        > is_active?
+        > last_updated
+     - active_stocks
+        > stock_id_pk
+        > company_id_fk
+        > stock_value
+        > date_published
+        > is_active?
+        > last_updated
+     - company information
+        > company_id_fk
+        > company_reg
+        > date_established
+        > owner
+        > func(curr_floating_stocks)
+        > last_updated
+    - trades
+        > trade_id_pk
+        > usr_id
+        > stock_id
+        > buying_price
+        > date_sold
+    - news
+        > news_id
+        > company_id
+        > sentiment
+        > sentiment_score
+        > last_updated
+     
+     - func(create new tables for when insert company)
+        - previous_stock_information
+            > date
+            > open
+            > high
+            > low
+            > close
+            > change
