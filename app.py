@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, redirect
 # from flask_sqlalchemy import SQLAlchemy
 from flask import request
+import psycopg2
 # from flask_migrate import Migrate
 
 # from sqlalchemy import Column, Integer, String, DateTime, Boolean
@@ -100,7 +101,17 @@ def contact():
 
 @app.route("/stocks")
 def stocks():
-    return render_template("stocks.html")
+    # Connect to the database
+    conn = psycopg2.connect(dbname="testdb", user="postgres", password="pgadmin", host="localhost", port="5432")
+    # Execute a SELECT query to fetch the data
+    cur = conn.cursor()
+    cur.execute("SELECT company_id, stock_value, date_published, is_active FROM stocks")
+    rows = cur.fetchall()
+    # Close the database connection
+    cur.close()
+    conn.close()
+    # Render the template and pass the data to it
+    return render_template("stocks.html", data=rows)
 
 # @app.route("/stocks", methods=["GET", "POST"])
 # def handle_index():

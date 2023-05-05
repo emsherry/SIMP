@@ -22,22 +22,22 @@
                             <table id="dip-body" class="display" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Symbol</th>
-                                        <th>Days</th>
-                                        <th>Loss</th>
-                                        <th>Updated</th>
+                                        <th>Company ID</th>
+                                        <th>Stock Value</th>
+                                        <th>Date Published</th>
+                                        <th>Is Active</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Symbol</th>
-                                        <th>Days</th>
-                                        <th>Loss</th>
-                                        <th>Updated</th>
-                                    </tr>
-                                </tfoot>
+								<tbody>
+									{% for row in data %}
+									<tr>
+										<td>{{ row[0] }}</td>
+										<td>{{ row[1] }}</td>
+										<td>{{ row[2] }}</td>
+										<td>{{ row[3] }}</td>
+									</tr>
+									{% endfor %}
+								</tbody>								
                             </table>
                         </div>
                     </div>
