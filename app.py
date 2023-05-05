@@ -7,9 +7,15 @@ from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from time import time
 
 
+usr = "simp-admin"
+password = "}eikQyFK6>ikM[iV"
+db_conn_name = "celestial-torus-385804:us-central1:simp"
+db_connstr = f"postgres://{usr}:{password}@simp?host={db_conn_name}"
+
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://fizo:fizosDBProj@localhost:5432/postgres'
+# app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://fizo:fizosDBProj@localhost:5432/postgres'
+app.config["SQLALCHEMY_DATABASE_URI"] = db_connstr
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
