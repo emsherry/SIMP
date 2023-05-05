@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<title>SIMP</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="Cryptocurrency Landing Page Template">
+		<meta name="keywords" content="cryptocurrency, unica, creative, html">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Favicon -->
+		<link href="img/favicon.ico" rel="shortcut icon"/>
+		
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}"/>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}"/>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/themify-icons.css')}}"/>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}"/>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/owl.carousel.css')}}"/>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"/>
+			
+    </head>
+
+<body>        
+
+	{% block loader %}{% endblock %}
+
+	<!-- Header section -->
+	<header class="header-section clearfix">
+		<div class="container-fluid">
+			<a href="index.html" class="site-logo">
+				<img src="{{url_for('static',filename='img/logo.png')}}" alt="">
+			</a>
+			<div class="responsive-bar"><i class="fa fa-bars"></i></div>
+			<a href="" class="user"><i class="fa fa-user"></i></a>
+			<a href="" class="site-btn">Sign Up Free</a>
+			<nav class="main-menu">
+				<ul class="menu-list">
+					<li><a href="/index">Home</a></li>
+					<li><a href="/stocks">Stocks</a></li>
+					<li><a href="">Privacy Policy</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<!-- Header section end -->
+
+{% block content %}{% endblock %}
+
+
+</body>
+</html>
