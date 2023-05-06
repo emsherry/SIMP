@@ -1,66 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>SIMP</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="Cryptocurrency Landing Page Template">
-	<meta name="keywords" content="cryptocurrency, unica, creative, html">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Favicon -->
-	<link href="{{url_for('static',filename='img/favicon.ico')}}" rel="shortcut icon"/>
-
-	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}"/>
-	<link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}"/>
-	<link rel="stylesheet" href="{{url_for('static', filename='css/themify-icons.css')}}"/>
-	<link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}"/>
-	<link rel="stylesheet" href="{{url_for('static', filename='css/owl.carousel.css')}}"/>
-	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"/>
-	<!-- <link rel="stylesheet" href="./css/bootstrap.min.css"/> -->
-	<!-- <link rel="stylesheet" href="./css/font-awesome.min.css"/> -->
-	<!-- <link rel="stylesheet" href="./css/themify-icons.css"/> -->
-	<!-- <link rel="stylesheet" href="./css/animate.css"/> -->
-	<!-- <link rel="stylesheet" href="./css/owl.carousel.css"/> -->
-	<!-- <link rel="stylesheet" href="./css/style.css"/> -->
-	
-
-
-	<!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-
-</head>
-<body>
+{% extends "layout.html" %}
+	{% block loader %}
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
-	</div>
+	</div>	
+	{% endblock loader %}
 
-	<!-- Header section -->
-	<header class="header-section clearfix">
-		<div class="container-fluid">
-			<a href="index.html" class="site-logo">
-				<img src="{{url_for('static',filename='img/logo.png')}}" alt="">
-			</a>
-			<div class="responsive-bar"><i class="fa fa-bars"></i></div>
-			<a href="" class="user"><i class="fa fa-user"></i></a>
-			<a href="regform/reg.html" class="site-btn">Sign Up Free</a>
-			<nav class="main-menu">
-				<ul class="menu-list">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="stocks.html">Stocks</a></li>
-					<li><a href="">Privacy Policy</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
-	<!-- Header section end -->
-
+	{% block content %}
 
 	<!-- Hero section -->
 	<section class="hero-section">
@@ -81,8 +27,8 @@
 		</div>
 	</section>
 	<!-- Hero section end -->
-
-
+	
+	
 	<!-- About section -->
 	<section class="about-section spad">
 		<div class="container">
@@ -100,7 +46,7 @@
 		</div>
 	</section>
 	<!-- About section end -->
-
+	
 
 	<!-- Features section -->
 	<section class="features-section spad gradient-bg">
@@ -167,8 +113,8 @@
 		</div>
 	</section>
 	<!-- Features section end -->
-
-
+	
+	
 	<!-- Process section -->
 	<section class="process-section spad">
 		<div class="container">
@@ -208,7 +154,9 @@
 		</div>
 	</section>
 	<!-- Process section end -->
-
+	
+	
+	
 
 
 	<!-- Team section -->
@@ -239,7 +187,7 @@
 						<span>Member</span>
 						</div>
 					<p>Raja Ata Ul Karim is a Sophomoee Computer Science student with an expertise in absolutely nothing.
-						<br><br>"I'm just here in the degree because I heard you get a job, and that sounds pretty neat, if you ask me</p>
+						<br><br>"I'm just here in the degree because I heard you get a job, and that sounds pretty neat, if you ask me</p>
 				</div>
 			</div>
 			<!-- Team member -->
@@ -282,7 +230,7 @@
 						<h2>Ali Inayatullah</h2>
 						<span>Member</span>
 					</div>
-					<p>Ali Inayatullah is a Sophomore Computer Science Student with expertise in C++, Python, HTML, CSS and Javascript.<br>"I possess the skills and knowledge necessary to create and implement efficient software solutions. my objective is to gain a thorough understanding of computing systems and the ability to apply this knowledge to solve complex problems."</p>
+					<p>Ali Inayatullah is a Sophomore Computer Science Student with expertise in C++, Python, HTML, CSS and Javascript.<br>"I possess the skills and knowledge necessary to create and implement efficient software solutions. my objective is to gain a thorough understanding of computing systems and the ability to apply this knowledge to solve complex problems."</p>
 				</div>
 			</div>
 			<!-- Team member -->
@@ -303,12 +251,12 @@
 						<h2>Faizan Haq</h2>
 						<span>Member</span>
 					</div>
-					<p>A 2nd year computer science undergraduate student with a passion for computer vision. Skilled in Python, OpenCV, TensorFlow, Torch and Yolo. <br><br>"If you ever think of a quote but want it to sound smarter, just say albert einstein said it" ~Albert Einstein</p>
+					<p>A 2nd year computer science undergraduate student with a passion for computer vision. Skilled in Python, OpenCV, TensorFlow, Torch and Yolo. <br><br>"If you ever think of a quote but want it to sound smarter, just say albert einstein said it" ~Albert Einstein</p>
 				</div>
 			</div>
 	<!-- Team Section End -->
 	
-
+	
 	<!-- Blog section -->
 	<title>Live Tweets</title>
 	<style>
@@ -321,20 +269,20 @@
 		.tweet p {
 			margin: 5px;
 		}
-	</style>
+		</style>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		// $(document).ready(function(){
-		// 	// load_tweets();
-		// 	// setInterval(function(){ load_tweets(); }, 5000); // Refresh tweets every 5 seconds
-		// });
-
-		function load_tweets() {
-			$.ajax({
-				url: '{{url_for("static",filename="tweets.php")}}', // Your PHP file to retrieve tweets
-				type: 'get',
-				success: function(response) {
-					$('#tweets-container').html(response); // Add tweets to the container
+			// 	// load_tweets();
+			// 	// setInterval(function(){ load_tweets(); }, 5000); // Refresh tweets every 5 seconds
+			// });
+			
+			function load_tweets() {
+				$.ajax({
+					url: '{{url_for("static",filename="tweets.php")}}', // Your PHP file to retrieve tweets
+					type: 'get',
+					success: function(response) {
+						$('#tweets-container').html(response); // Add tweets to the container
 				},
 				error: function(xhr, ajaxOptions, thrownError) {
 					console.log(xhr.status);
@@ -344,39 +292,39 @@
 		}
 	</script>
 </head>
- 
-
-	<!-- Blog section end -->
 
 
-	<!-- Footer section -->
-	<footer class="footer-section">
-		<div class="container">
-			<div class="row spad">
-				<div class="col-md-6 col-lg-3 footer-widget">
-					<img src="{{url_for('static',filename='img/logo.png')}}" class="mb-4" alt="">
-					<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia dese mollit anim id est laborum.</p>
-					<span>
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://www.linkedin.com/in/sherry-ahmad/" target="_blank">Shehryar Ahmad</a>
-</span>
-				</div>
-				<div class="col-md-6 col-lg-2 offset-lg-1 footer-widget">
-					<h5 class="widget-title">Resources</h5>
-					<ul>
-						<li><a href="#">How to Buy Stocks</a></li>
-						<li><a href="#">Stocks Overview</a></li>
-						<li><a href="#">Blog News</a></li>
-						<li><a href="#">How to Sell Stocks</a></li>
-						</ul>
-				</div>
+<!-- Blog section end -->
+
+
+<!-- Footer section -->
+<footer class="footer-section">
+	<div class="container">
+		<div class="row spad">
+			<div class="col-md-6 col-lg-3 footer-widget">
+				<img src="{{url_for('static',filename='img/logo.png')}}" class="mb-4" alt="">
+				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia dese mollit anim id est laborum.</p>
+				<span>
+					Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://www.linkedin.com/in/sherry-ahmad/" target="_blank">Shehryar Ahmad</a>
+				</span>
+			</div>
+			<div class="col-md-6 col-lg-2 offset-lg-1 footer-widget">
+				<h5 class="widget-title">Resources</h5>
+				<ul>
+					<li><a href="#">How to Buy Stocks</a></li>
+					<li><a href="#">Stocks Overview</a></li>
+					<li><a href="#">Blog News</a></li>
+					<li><a href="#">How to Sell Stocks</a></li>
+				</ul>
+			</div>
 				<div class="col-md-6 col-lg-2 offset-lg-1 footer-widget">
 					<h5 class="widget-title">Quick Links</h5>
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="#">Stocks</a></li>
+						<li><a href="/index">Home</a></li>
+						<li><a href="/stocks">Stocks</a></li>
 						<li><a href="#">Privacy Policy</a></li>
-						<li><a href="contact.html">Contact Us</a></li>
-						</ul>
+						<li><a href="/contact">Contact Us</a></li>
+					</ul>
 				</div>
 				<div class="col-md-6 col-lg-3 footer-widget pl-lg-5 pl-3">
 					<h5 class="widget-title">Follow Us</h5>
@@ -401,11 +349,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</div>
 	</footer>
-
-
-	<!--====== JavaScript & Jquery ======-->
+	
+	
+	<!--====== Javascripts & Jquery ======-->
 	<script src="{{url_for('static', filename='js/jquery-3.2.1.min.js')}}"></script>
 	<script src="{{url_for('static',filename='js/owl.carousel.min.js')}}"></script>
 	<script src="{{url_for('static',filename='js/main.js')}}"></script>
-</body>
-</html>
+{% endblock content %}
