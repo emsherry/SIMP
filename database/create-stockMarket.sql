@@ -36,6 +36,7 @@ create table trades (
 );
 
 create table news (
+    news_id serial primary key,
     company_id int not null references companies(company_id),
     sentiment text not null,
     sentiment_score double precision not null default 0,

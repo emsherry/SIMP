@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+	{% block content %}
+    <!-- Hero section -->
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 hero-text">
+					<h2>Invest in <span>Stocks</span>Stock Investment Predictor</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end -->
+
+    <main id="main">
+        <!-- ======= Table ======= -->
+        <section class="diptable counts scrollsnap">
+            <div data-aos="fade-right" data-aos-delay="20">
+                <div class="vertical-center">
+                    <div class="container">
+                        <div class="data-table-container diptable">
+                            <table id="dip-body" class="display" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Company ID</th>
+                                        <th>Stock Value</th>
+                                        <th>Date Published</th>
+                                        <th>Is Active</th>
+                                    </tr>
+                                </thead>
+								<tbody>
+									{% for row in data %}
+									<tr>
+										<td>{{ row[0] }}</td>
+										<td>{{ row[1] }}</td>
+										<td>{{ row[2] }}</td>
+										<td>{{ row[3] }}</td>
+									</tr>
+									{% endfor %}
+								</tbody>								
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <!-- End Table -->
+    </main>
+    <!-- End #main -->
+
+    <script>
+        $(document).ready(function () {
+            $('#dip-body').DataTable({
+                ajax: '/all.json',
+                order: [[3, 'asc']],
+            });
+        });
+
+    </script>
+{% endblock content %}
