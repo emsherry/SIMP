@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SIMP</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Cryptocurrency Landing Page Template">
+	<meta name="keywords" content="cryptocurrency, unica, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href="{{url_for('static',filename='img/favicon.ico')}}" rel="shortcut icon"/>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}"/>
+	<link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}"/>
+	<link rel="stylesheet" href="{{url_for('static', filename='css/themify-icons.css')}}"/>
+	<link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}"/>
+	<link rel="stylesheet" href="{{url_for('static', filename='css/owl.carousel.css')}}"/>
+	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"/>
+	<!-- <link rel="stylesheet" href="./css/bootstrap.min.css"/> -->
+	<!-- <link rel="stylesheet" href="./css/font-awesome.min.css"/> -->
+	<!-- <link rel="stylesheet" href="./css/themify-icons.css"/> -->
+	<!-- <link rel="stylesheet" href="./css/animate.css"/> -->
+	<!-- <link rel="stylesheet" href="./css/owl.carousel.css"/> -->
+	<!-- <link rel="stylesheet" href="./css/style.css"/> -->
+	
+
+
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<header class="header-section clearfix">
+		<div class="container-fluid">
+			<a href="index.html" class="site-logo">
+				<img src="{{url_for('static',filename='img/logo.png')}}" alt="">
+			</a>
+			<div class="responsive-bar"><i class="fa fa-bars"></i></div>
+			<a href="" class="user"><i class="fa fa-user"></i></a>
+			<a href="regform/reg.html" class="site-btn">Sign Up Free</a>
+			<nav class="main-menu">
+				<ul class="menu-list">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="stocks.html">Stocks</a></li>
+					<li><a href="">Privacy Policy</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<!-- Header section end -->
+
+
+	<!-- Hero section -->
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 hero-text">
+					<h2>Invest in <span>Stocks</span> <br>Stock Investment Predictor</h2>
+					<h4>Use modern progressive technologies of Stocks to earn money</h4>
+					<form class="hero-subscribe-from">
+						<input type="text" placeholder="Enter your email">
+						<button class="site-btn sb-gradients">Get Started</button>
+					</form>
+				</div>
+				<div class="col-md-6">
+					<img src="{{url_for('static',filename='img/laptop.png')}}" class="laptop-image" alt="">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end -->
+
+
+	<!-- About section -->
+	<section class="about-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-6 about-text">
+					<h2>What is Stock?</h2>
+					<h5>Stocks are a revolutionary way for individuals to invest in companies and participate in the growth of the global economy.</h5>
+					<p>Stocks have played a significant role in shaping modern capitalism and have become an integral part of the global financial system. Through stock ownership, investors can enjoy potential gains in value, regular dividend payments, and a voice in important corporate decisions.</p>
+					<a href="" class="site-btn sb-gradients sbg-line mt-5">Get Started</a>
+				</div>
+			</div>
+			<div class="about-img">
+				<img src="{{url_for('static',filename='img/about-img.png')}}" alt="">
+			</div>
+		</div>
+	</section>
+	<!-- About section end -->
+
+
+	<!-- Features section -->
+	<section class="features-section spad gradient-bg">
+		<div class="container text-white">
+			<div class="section-title text-center">
+				<h2>Our Features</h2>
+				<p>Stock is the simplest way to exchange money at very low cost.</p>
+			</div>
+			<div class="row">
+				<!-- feature -->
+				<div class="col-md-6 col-lg-4 feature">
+					<i class="ti-mobile"></i>
+					<div class="feature-content">
+						<h4>Mobile Apps</h4>
+						<p>Our mobile app will provide a seamless and user-friendly experience for exchanging money and managing your investments on-the-go. </p>
+						<a href="" class="readmore">Coming Soon</a>
+					</div>
+				</div>
+				<!-- feature -->
+				<div class="col-md-6 col-lg-4 feature">
+					<i class="ti-shield"></i>
+					<div class="feature-content">
+						<h4>Safe & Secure</h4>
+						<p> Your security is our top priority. We use advanced encryption and authentication technologies to ensure that your personal and financial information is always protected. </p>
+						
+					</div>
+				</div>
+				<!-- feature -->
+				<div class="col-md-6 col-lg-4 feature">
+					<i class="ti-wallet"></i>
+					<div class="feature-content">
+						<h4>Wallet</h4>
+						<p>Our wallet feature allows you to easily store and manage your cryptocurrencies and other digital assets in one place. </p>
+						<a href="" class="readmore">Coming Soon</a>
+					</div>
+				</div>
+				<!-- feature -->
+				<div class="col-md-6 col-lg-4 feature">
+					<i class="ti-headphone-alt"></i>
+					<div class="feature-content">
+						<h4>Experts Support</h4>
+						<p>Our team of investment experts is available to provide guidance and support, helping you make informed investment decisions.</p>
+					</div>
+				</div>
+				<!-- feature -->
+				<div class="col-md-6 col-lg-4 feature">
+					<i class="fas fa-chart-line"></i>
+					<div class="feature-content">
+						<h4>Learn to Invest Right</h4>
+						<p>Investing in stocks is a great way to grow your wealth over time, but it can also be intimidating if you're new to the world of investing. Our "Learn to Invest in Stocks" program is designed to help you get started with confidence. </p>
+						
+					</div>
+				</div>
+				<!-- feature -->
+				<div class="col-md-6 col-lg-4 feature">
+					<i class="ti-panel"></i>
+					<div class="feature-content">
+						<h4>Recuring Buys</h4>
+						<p>Our recurring buys feature will allow you to automatically purchase a set amount of stocks at regular intervals, helping you to build your investment portfolio over time </p>
+						<a href="" class="readmore">Coming Soon</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Features section end -->
+
+
+	<!-- Process section -->
+	<section class="process-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h2>Get Started With Stocks</h2>
+				<p>Start learning about Stock with interactive tutorials. It’s fun, easy, and takes only a few minutes! </p>
+			</div>
+			<div class="row">
+				<div class="col-md-4 process">
+					<div class="process-step">
+						<figure class="process-icon">
+							<img src="{{url_for('static',filename='img/process-icons/1.png')}}" alt="#">
+						</figure>
+						<h4>Search Your Stock</h4>
+						<p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+					</div>
+				</div>
+				<div class="col-md-4 process">
+					<div class="process-step">
+						<figure class="process-icon">
+							<img src="{{url_for('static',filename='img/process-icons/2.png')}}" alt="#">
+						</figure>
+						<h4>Predict its value</h4>
+						<p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+					</div>
+				</div>
+				<div class="col-md-4 process">
+					<div class="process-step">
+						<figure class="process-icon">
+							<img src="{{url_for('static',filename='img/process-icons/3.png')}}" alt="#">
+						</figure>
+						<h4>Invest accordingly!</h4>
+						<p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Process section end -->
+
+
+
+	<!-- Team section -->
+	<section class="team-section spad">
+		<div class="container" >
+			<div class="section-title text-center">
+				<h2>Meet Our Team</h2>
+				<p>Our experts in the field of stocks prediction can always help you with any of your questions!</p>
+			</div>
+		</div>
+		<div class="team-members">
+			<!-- Team member -->
+			<div class="member">
+				<div class="member-text">
+					<div class="member-img set-bg" data-setbg="{{url_for('static',filename='img/member/1.jpg')}}"></div>
+					<h2>Raja Ata Ul Karim</h2>
+					<span>Sophomore CS Student</span>
+				</div>
+				<div class="member-social">
+					<a href="http://Insta.com/raja.jpeg" target="_blank"><i class="fa fa-instagram"></i></a>
+					<a href="http://Linkedin.com/rajataaulkarim" target="_blank"><i class="fa fa-linkedin"></i></a>
+					<a href="http://GitHub.com/r2ja" target="_blank"><i class="fa fa-github"></i></a>
+				</div>
+				<div class="member-info">
+					<div class="member-img mf set-bg" data-setbg="{{url_for('static',filename='img/member/1.jpg')}}"></div>
+					<div class="member-meta">
+						<h2>Raja Ata Ul Karim</h2>
+						<span>Member</span>
+						</div>
+					<p>Raja Ata Ul Karim is a Sophomoee Computer Science student with an expertise in absolutely nothing.
+						<br><br>"I'm just here in the degree because I heard you get a job, and that sounds pretty neat, if you ask me</p>
+				</div>
+			</div>
+			<!-- Team member -->
+			<div class="member">
+				<div class="member-text">
+					<div class="member-img set-bg" data-setbg="{{url_for('static',filename='img/member/2.jpg')}}"></div>
+					<h2>Shehryar Ahmad</h2>
+					<span>Sophomore CS Student</span>
+				</div>
+				<div class="member-social">
+					<a href="https://www.instagram.com/sh3rrryyy/" target="_blank"><i class="fa fa-instagram"></i></a>
+					<a href="https://www.linkedin.com/in/sherry-ahmad/" target="_blank"><i class="fa fa-linkedin"></i></a>
+					<a href="https://github.com/emsherry" target="_blank"><i class="fa fa-github"></i></a>
+				</div>
+				<div class="member-info">
+					<div class="member-img mf set-bg" data-setbg="{{url_for('static',filename='img/member/2.jpg')}}"></div>
+					<div class="member-meta">
+						<h2>Shehryar Ahmad</h2>
+						<span>Member</span>
+					</div>
+					<p>Shehryar Ahmad is a Sophomoee Computer Science student with an expertise in C++, HTML, CSS, JavaScript, PHP, Python and much more.
+						<br>“To pursue a challenging career and be part of a progressive organization that gives scope to enhance my knowledge, skills and to reach the pinnacle in the computing and research field with sheer determination, dedication, and hard work.</p>
+				</div>
+			</div>
+			<!-- Team member -->
+			<div class="member">
+				<div class="member-text">
+					<div class="member-img set-bg" data-setbg="{{url_for('static',filename='img/member/3.jpg')}}"></div>
+					<h2>Ali Inayatullah</h2>
+					<span>Sophomore CS Student</span>
+				</div>
+				<div class="member-social">
+					<a href="https://www.instagram.com/aliinayatullah/" target="_blank"><i class="fa fa-instagram"></i></a>
+					<a href="https://linkedin.com/in/ali-inayatullah" target="_blank"><i class="fa fa-linkedin"></i></a>
+					<a href="https://github.com/AliInayatullah" target="_blank"><i class="fa fa-github"></i></a>
+				</div>
+				<div class="member-info">
+					<div class="member-img mf set-bg" data-setbg="{{url_for('static',filename='img/member/3.jpg')}}"></div>
+					<div class="member-meta">
+						<h2>Ali Inayatullah</h2>
+						<span>Member</span>
+					</div>
+					<p>Ali Inayatullah is a Sophomore Computer Science Student with expertise in C++, Python, HTML, CSS and Javascript.<br>"I possess the skills and knowledge necessary to create and implement efficient software solutions. my objective is to gain a thorough understanding of computing systems and the ability to apply this knowledge to solve complex problems."</p>
+				</div>
+			</div>
+			<!-- Team member -->
+			<div class="member">
+				<div class="member-text">
+					<div class="member-img set-bg" data-setbg="{{url_for('static',filename='img/member/4.jpg')}}"></div>
+					<h2>Faizan Haq</h2>
+					<span>Sophomore CS Student</span>
+				</div>
+				<div class="member-social">
+					<a href="http://instagram.com/fizo-neechan" target="_blank"><i class="fa fa-instagram"></i></a>
+					<a href="https://www.facebook.com/muhammad.faizan.94695459/" target="_blank"><i class="fa fa-facebook"></i></a>
+					<a href="http://github.com/fizo-neechan" target="_blank"><i class="fa fa-github"></i></a>
+				</div>
+				<div class="member-info">
+					<div class="member-img mf set-bg" data-setbg="{{url_for('static',filename='img/member/4.jpg')}}"></div>
+					<div class="member-meta">
+						<h2>Faizan Haq</h2>
+						<span>Member</span>
+					</div>
+					<p>A 2nd year computer science undergraduate student with a passion for computer vision. Skilled in Python, OpenCV, TensorFlow, Torch and Yolo. <br><br>"If you ever think of a quote but want it to sound smarter, just say albert einstein said it" ~Albert Einstein</p>
+				</div>
+			</div>
+	<!-- Team Section End -->
+	
+
+	<!-- Blog section -->
+	<title>Live Tweets</title>
+	<style>
+		.tweet {
+			margin: 10px;
+			padding: 10px;
+			background-color: #f5f5f5;
+			border-radius: 10px;
+		}
+		.tweet p {
+			margin: 5px;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		// $(document).ready(function(){
+		// 	// load_tweets();
+		// 	// setInterval(function(){ load_tweets(); }, 5000); // Refresh tweets every 5 seconds
+		// });
+
+		function load_tweets() {
+			$.ajax({
+				url: '{{url_for("static",filename="tweets.php")}}', // Your PHP file to retrieve tweets
+				type: 'get',
+				success: function(response) {
+					$('#tweets-container').html(response); // Add tweets to the container
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					console.log(xhr.status);
+					console.log(thrownError);
+				}
+			});
+		}
+	</script>
+</head>
+ 
+
+	<!-- Blog section end -->
+
+
+	<!-- Footer section -->
+	<footer class="footer-section">
+		<div class="container">
+			<div class="row spad">
+				<div class="col-md-6 col-lg-3 footer-widget">
+					<img src="{{url_for('static',filename='img/logo.png')}}" class="mb-4" alt="">
+					<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia dese mollit anim id est laborum.</p>
+					<span>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://www.linkedin.com/in/sherry-ahmad/" target="_blank">Shehryar Ahmad</a>
+</span>
+				</div>
+				<div class="col-md-6 col-lg-2 offset-lg-1 footer-widget">
+					<h5 class="widget-title">Resources</h5>
+					<ul>
+						<li><a href="#">How to Buy Stocks</a></li>
+						<li><a href="#">Stocks Overview</a></li>
+						<li><a href="#">Blog News</a></li>
+						<li><a href="#">How to Sell Stocks</a></li>
+						</ul>
+				</div>
+				<div class="col-md-6 col-lg-2 offset-lg-1 footer-widget">
+					<h5 class="widget-title">Quick Links</h5>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="#">Stocks</a></li>
+						<li><a href="#">Privacy Policy</a></li>
+						<li><a href="contact.html">Contact Us</a></li>
+						</ul>
+				</div>
+				<div class="col-md-6 col-lg-3 footer-widget pl-lg-5 pl-3">
+					<h5 class="widget-title">Follow Us</h5>
+					<div class="social">
+						<a href="" class="facebook"><i class="fa fa-facebook"></i></a>
+						<a href="" class="google"><i class="fa fa-google-plus"></i></a>
+						<a href="" class="instagram"><i class="fa fa-instagram"></i></a>
+						<a href="" class="twitter"><i class="fa fa-twitter"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<div class="row">
+					<ul class="footer-nav">
+						<li><a href="">Terms of Use</a></li>
+						<li><a href="">Privacy Policy </a></li>
+						<li><a href="">m.shehryarahmad@gmail.com</a></li>
+						<li><a href="">+92 3219892344</a></li>
+					</ul>
+					
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+	<!--====== JavaScript & Jquery ======-->
+	<script src="{{url_for('static', filename='js/jquery-3.2.1.min.js')}}"></script>
+	<script src="{{url_for('static',filename='js/owl.carousel.min.js')}}"></script>
+	<script src="{{url_for('static',filename='js/main.js')}}"></script>
+</body>
+</html>
