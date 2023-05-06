@@ -28,7 +28,7 @@ keywords = ['Pakistan Stock Exchange', 'PSX', 'Karachi Stock Exchange', 'KSE', '
             'Pakistan Gulf', 'Pakistan Saudi Arabia', 'Pakistan UAE', 'Pakistan Qatar', 'Pakistan Oman', 'Pakistan Kuwait', 'Pakistan Bahrain', 'Pakistan Turkey', 
             'Pakistan Russia', 'Pakistan China-Pakistan Economic Corridor', 'Pakistan One Belt One Road', 'Pakistan Economic Outlook', 'Pakistan Economic Survey', 
             'Pakistan Economic Indicators', 'Pakistan Economic Growth Rate', 'Pakistan Stock Market News', 'Pakistan Business News', 'Pakistan Financial News', 
-            'Pakistan Economic Policy', 'Pakistan Economic Reforms', 'Paksitan', 'Economy']
+            'Pakistan Economic Policy', 'Pakistan Economic Reforms', 'Pakistan', 'Economy']
 
 # keywords = ['Pakistan']
 
@@ -56,3 +56,23 @@ with open('scrapes.csv', 'w', newline='', encoding='utf-8') as csvfile:
     writer.writerow(['Sentence', 'Link', 'Sentiment Score'])
     for data in scraped_data:
         writer.writerow([data[0], data[1], data[2]])
+
+
+def eliminatezeros():
+    filename = 'scrapes.csv'
+    headers = ['Title', 'Link', 'Sentiment']
+    modified_data = []
+    with open(filename, 'r', newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader) 
+
+        for row in reader:
+            if float(row[2]) != 0:
+                modified_data.append(row)
+
+    with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(headers)
+        writer.writerows(modified_data)
+
+eliminatezeros();
