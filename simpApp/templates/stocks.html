@@ -16,28 +16,31 @@
         <!-- ======= Table ======= -->
         <section class="diptable counts scrollsnap">
             <div data-aos="fade-right" data-aos-delay="20">
-                <div class="vertical-center">
+                <div class="" style="padding:10rem;">
                     <div class="container">
                         <div class="data-table-container diptable">
-                            <table id="dip-body" class="display" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Company ID</th>
-                                        <th>Stock Value</th>
-                                        <th>Date Published</th>
-                                        <th>Is Active</th>
+                            <table id="dip-body" class="display table table-striped" style="width:100%; font-size: 1.5rem;">
+                                <thead class="thead-light">
+                                    <tr style="font-weight: bold;">
+                                        <th></th>
+                                        <th scope="col">Company Name</th>
+                                        <th scope="col">Change</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 								<tbody>
-									{% for row in data %}
-									<tr>
-										<td>{{ row[0] }}</td>
-										<td>{{ row[1] }}</td>
-										<td>{{ row[2] }}</td>
-										<td>{{ row[3] }}</td>
-									</tr>
-									{% endfor %}
-								</tbody>								
+                                        {% for row in data %}
+                                        <tr onclick="window.location ='#'">
+                                            <td>{{ 0 }}</td>
+                                            <td>{{ row[0] }}</td>
+                                            {% if row[1]>=0 %}
+                                            <td style="color: green;">{{ row[1] }}</td>
+                                            {%else%}
+                                            <td style="color: red;">{{ row[1] }}</td>
+                                            {%endif%}
+                                        </tr>
+                                        {% endfor %}
+								</tbody>
                             </table>
                         </div>
                     </div>

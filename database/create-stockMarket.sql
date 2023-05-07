@@ -9,14 +9,14 @@ create table companies (
     last_updated date not null default now()
 );
 
-create table stocks (
-    stock_id serial primary key,
-    company_id int not null references companies(company_id),
-    stock_value int not null check(stock_value>0),
-    date_published date not null default now(),
-    is_active boolean not null default 'false',
-    last_updated date default now()
-);
+-- create table stocks (
+--     stock_id serial primary key,
+--     company_id int not null references companies(company_id),
+--     stock_value int not null check(stock_value>0),
+--     date_published date not null default now(),
+--     is_active boolean not null default 'false',
+--     last_updated date default now()
+-- );
 
 create table company_information (
     company_id int primary key references companies(company_id),
