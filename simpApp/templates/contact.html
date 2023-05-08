@@ -27,53 +27,53 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7">
-					<form class="contact-form">
+					<form class="contact-form" action="/contact" method="POST">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input class="check-form" type="text" placeholder="First Name*:">
+									<input class="check-form" type="text" name="fname" placeholder="First Name" required>
 									<span><i class="ti-check"></i></span>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input class="check-form" type="text" placeholder="Last Name*:">
+									<input class="check-form" type="text" name="lname" placeholder="Last Name" required>
 									<span><i class="ti-check"></i></span>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input class="check-form" type="text" placeholder="Email Adress*:">
+									<input class="check-form" type="email" name="email" placeholder="Email Adress" required>
 									<span><i class="ti-check"></i></span>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input class="check-form" type="text" placeholder="Phone Number*:">
+									<input class="check-form" type="text" name="phNum" placeholder="Phone Number">
 									<span><i class="ti-check"></i></span>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<textarea placeholder="Tell us about your question!"></textarea>
+									<textarea placeholder="Tell us about your question!" name="question" required></textarea>
 								</div>
 								<h5 class="mb-3">Way to Contacts<span>*</span>:</h5>
 								<div class="contact-type">
 									<label class="ct-label">Phone
-										<input type="radio" name="radio">
+										<input type="radio" name="preference" value="phone">
 										 <span class="checkmark"></span>
 									</label>
 									<label class="ct-label">Email
-										<input type="radio" name="radio">
+										<input type="radio" name="preference" value="email">
 										 <span class="checkmark"></span>
 									</label>
 									<label class="ct-label">Other
-										<input type="radio" name="radio">
+										<input type="radio" name="preference" value="other">
 										 <span class="checkmark"></span>
 									</label>
 								</div>
 
-								<button class="site-btn sb-gradients mt-4">Submit form</button>
+								<button class="site-btn sb-gradients mt-4" input_type="submit">Submit form</button>
 							</div>
 						</div>
 					</form>

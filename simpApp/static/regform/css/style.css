@@ -104,10 +104,6 @@ input[type=radio] {
   -o-appearance: radio !important;
   -ms-appearance: radio !important; }
 
-img {
-  max-width: 100%;
-  height: auto; }
-
 figure {
   margin: 0; }
 
@@ -137,7 +133,7 @@ body {
   color: #222;
   font-weight: 400;
   font-family: 'Montserrat';
-  background-image: url("../images/signup-bg.jpg");
+  /* background-image: url("../images/signup-bg.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   -moz-background-size: cover;
@@ -145,7 +141,8 @@ body {
   -o-background-size: cover;
   -ms-background-size: cover;
   background-position: center center;
-  padding: 115px 0; }
+  padding: 0; 
+}
 
 .container {
   width: 660px;

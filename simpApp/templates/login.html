@@ -1,0 +1,41 @@
+{%extends "forms.html"%}
+
+    {%block content%}
+    <!-- Hero section -->
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+                    <div class="signup-content">
+                        <form method="POST" id="signup-form" class="signup-form" action="/login">
+                            <h2 class="form-title">Enter Credentials</h2>
+                            <div class="form-group">
+                                <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>
+                                <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                            </div>
+                            {% if status == 'failure' %}
+                                <div style="color: red; text-align: center;">Invalid email / password</div>
+                            {%endif%}
+                            </form>
+                        <p class="loginhere">
+                            Don't have an account ? <a href="/register" class="loginhere-link">Sign Up here</a>
+                        </p>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end -->
+    {%endblock%}
+
+    {%block scripts%}
+    <!-- JS -->
+    <script src="{{url_for('static', filename='regform/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='regform/js/main.js')}}"></script>
+    {%endblock%}

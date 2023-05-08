@@ -20,3 +20,6 @@ inner join
     f.company_id=company_information.company_id;
 
 
+select user_id
+from auth
+where email_id='{email}' and pass='{password}';
