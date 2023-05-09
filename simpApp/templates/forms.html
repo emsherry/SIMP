@@ -1,35 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-		<title>SIMP</title>
-		<meta charset="UTF-8">
-		<meta name="description" content="Cryptocurrency Landing Page Template">
-		<meta name="keywords" content="cryptocurrency, unica, creative, html">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- Favicon -->
-		<link href="img/favicon.ico" rel="shortcut icon"/>
-		
-		<!-- Google Fonts -->
-		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-		
-		<!-- Stylesheets -->
-		<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}"/>
-		<link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}"/>
-		<link rel="stylesheet" href="{{url_for('static', filename='css/themify-icons.css')}}"/>
-		<link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}"/>
-		<link rel="stylesheet" href="{{url_for('static', filename='css/owl.carousel.css')}}"/>
-		<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"/>
-			
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Log In</title>
 
-<body>        
+    <!-- Favicon -->
+	<link href="{{url_for('static', filename='regform/img/favicon.ico')}}" rel="shortcut icon"/>
 
-	{% block loader %}{% endblock %}
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{{url_for('static', filename='regform/fonts/material-icon/css/material-design-iconic-font.min.css')}}">
 
-	<!-- Header section -->
+    <!-- Main css -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='regform/css/style.css')}}">
+</head>
+<body>
+
+    	<!-- Header section -->
 	<header class="header-section clearfix">
 		<div class="container-fluid">
-			<a href="index.html" class="site-logo">
+			<a href="/index" class="site-logo">
 				<img src="{{url_for('static',filename='img/logo.png')}}" alt="">
 			</a>
 			<div class="responsive-bar"><i class="fa fa-bars"></i></div>
@@ -47,7 +39,7 @@
 	</header>
 	<!-- Header section end -->
 
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
 <!-- Footer section -->
 <footer class="footer-section">

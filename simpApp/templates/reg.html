@@ -1,0 +1,59 @@
+{%extends "forms.html"%}
+
+    {%block content%}
+
+        <!-- Hero section -->
+	<section class="hero-section">
+        <div class="container">
+            <div class="signup-content">
+                <form method="POST" id="signup-form" class="signup-form" action="/signup">
+                    <h2 class="form-title">Create account</h2>
+                    <div class="form-group">
+                        <input type="text" class="form-input" name="name" id="name" placeholder="Your Name"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>
+                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="agreeterms" id="agreeterms" class="agree-term" />
+                        <label for="agreeterms" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                    </div>
+                    
+                    {% if status == 'failure' %}
+                    <div style="color: red; text-align: center;">{{message}}</div>
+                    {%endif%}
+
+                </form>
+                <p class="loginhere">
+                    Already have an account ? <a href="login.html" class="loginhere-link">Login here</a>
+                </p>
+            </div>
+        </div>
+	</section>
+	<!-- Hero section end -->
+
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+        </section>
+
+    </div>
+
+    {%endblock%}
+
+    {%block scripts%}
+    <!-- JS -->
+    <script src="{{url_for('static', filename='regform/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='regform/js/main.js')}}"></script>
+    {%endblock%}
