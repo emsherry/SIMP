@@ -28,13 +28,13 @@ create table company_information (
     last_updated date not null default now()
 );
 
-create table trades (
-    trade_id int primary key,
-    user_id int not null,
-    stock_id int not null references stocks(stock_id),
-    buying_price int not null check(buying_price>0),
-    date_sold date not null default now()
-);
+-- create table trades (
+--     trade_id int primary key,
+--     user_id int not null,
+--     stock_id int not null references stocks(stock_id),
+--     buying_price int not null check(buying_price>0),
+--     date_sold date not null default now()
+-- );
 
 create table news (
     news_id serial primary key,

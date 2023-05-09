@@ -176,3 +176,24 @@ def handle_signup():
                     conn.close()
 
             return app.redirect("/login")
+        
+@app.route("/stcks")
+def stcks():
+    return render_template("stcks.html")
+
+@app.route("/stcks", methods=["GET", "POST"])
+def getStcks():
+    query = "select * from market_data where company_id = 1;"
+
+    try:    
+        conn = psycopg2.connect(database='stockmarket', 
+                                        user="admin", 
+                                        password="simpingIsTheKeyToLife123",
+                                        host="localhost",
+                                        port='5432')
+        cursor = conn.cursor()
+        cursor.execute(query)
+        return jsonify(cursor.fetchone()[0])
+    except(Exception) as error:
+        print(error)
+

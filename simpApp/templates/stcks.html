@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 hero-text">
+          <h2>Invest in <span>Stocks</span> <br>Stock Investment Predictor</h2>
+          <h4>Use modern progressive technologies of Stocks to earn money</h4>
+          <form class="hero-subscribe-from">
+            <input type="text" placeholder="Enter your email">
+            <button class="site-btn sb-gradients">Get Started</button>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <img src="{{url_for('static',filename='img/laptop.png')}}" class="laptop-image" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+<!-- Charts section -->
+<section class="charts-section spad">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<canvas id="worldwide-sales"></canvas>
+			</div>
+			<div class="col-lg-6">
+				<canvas id="salse-revenue"></canvas>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Charts section end -->
+
+{% endblock %}
+
+{% block scripts %}
+<!-- Chart.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+<!-- Charts initialization script -->
+<script>
+    const chart = document.querySelector('.charts-section')
+    const getData = async function() {
+        const response = await fetch('/stcks', {
+            method: 'POST',
+            headers: {
+                
+            }
+        });
+        const data = response.json();
+        
+    }
+	// Worldwide Sales Chart
+	var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
+	var myChart1 = new Chart(ctx1, {
+		type: "bar",
+		data: {
+			labels: {{labels}},
+			datasets: [{
+					label: "USA",
+					data: {{data}},
+					backgroundColor: "rgba(0, 156, 255, .7)"
+				},
+				{
+					label: "UK",
+					data: [8, 35, 40, 60, 70, 55, 75],
+					backgroundColor: "rgba(0, 156, 255, .5)"
+				},
+				{
+					label: "AU",
+					data: [12, 25, 45, 55, 65, 70, 60],
+					backgroundColor: "rgba(0, 156, 255, .3)"
+				}
+			]
+		},
+		options: {
+			responsive: true
+		}
+	});
+
+
+	// Salse & Revenue Chart
+	var ctx2 = $("#salse-revenue").get(0).getContext("2d");
+	var myChart2 = new Chart(ctx2, {
+		type: "line",
+		data: {
+			labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+			datasets: [{
+					label: "Salse",
+					data: [15, 30, 55, 45, 70, 65, 85],
+					backgroundColor: "rgba(0, 156, 255, .5)",
+					fill: true
+				},
+				{
+					label: "Revenue",
+					data: [99, 135, 170, 130, 190, 180, 270],
+					backgroundColor: "rgba(0, 156, 255, .3)",
+					fill: true
+				}
+			]
+		},
+		options: {
+			responsive: true
+		}
+	});
+</script>
+{% endblock %}
