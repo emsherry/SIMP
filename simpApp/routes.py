@@ -1,14 +1,40 @@
-from flask import render_template, url_for, redirect, request
-from simpApp import app
+from flask import render_template, url_for, redirect, request, session, jsonify
+from simpApp import app, mailinglistSignup
 import psycopg2
+import bcrypt
 
+logged_in = False
 
 @app.route("/", methods=["GET"])
 @app.route("/index", methods=["GET"])
 @app.route("/home", methods=["GET"])
-def index():
+def handle_index():
     if request.method == "GET":
-        return render_template('index.html')
+        user = {
+            'uid': session.get("uid"),
+            'logged_in': session.get("logged_in"),
+        }
+        return render_template('index.html', user=user)
+    
+    
+@app.route("/home/<int:status>/<string:message>", methods=["GET"])
+def handle_index_message(status, message):
+    if request.method == "GET":
+        return render_template("index.html", status=status, message=message)
+
+
+@app.route("/newslettersignup", methods=["POST"])
+def handle_newslettersignup():
+    if request.method == "POST":
+        email = request.form["email"]
+        status = mailinglistSignup.mailingListSignup(email)
+
+        if status == 1:
+            return redirect("/home/1/Successfully signed up to our mailing list!")
+        else:
+            return redirect("/home/0/Newsletter signup failed...")
+
+
 
 @app.route("/stocks", methods=["GET", "POST"])
 def handle_stocks():
@@ -58,7 +84,11 @@ def handle_stocks():
 @app.route("/contact", methods=['GET', 'POST'])
 def handle_contact():
     if request.method == "GET":
-        return render_template("contact.html")
+        user = {
+            'uid': session.get("uid"),
+            'logged_in': session.get("logged_in"),
+        }
+        return render_template("contact.html", user=user)
     elif request.method == "POST":
         fname = request.form["fname"]
         lname = request.form["lname"]
@@ -92,16 +122,19 @@ def handle_contact():
 @app.route("/login", methods=["GET", "POST"])
 def handle_login():
     if request.method == "GET":
-        return render_template("login.html")
+        if not  session.get("logged_in"):
+            return render_template("login.html")
+        else:
+            return redirect("/home")
     elif request.method == "POST":
 
         email = request.form["email"]
-        password = request.form["password"]
+        password = request.form["password"].encode('utf-8')
 
         query = f"""
-            select user_id 
+            select user_id , pass
             from auth 
-            where email_id='{email}' and pass='{password}'
+            where email_id='{email}'
         """
 
         try:
@@ -113,15 +146,18 @@ def handle_login():
             curs = conn.cursor()
             curs.execute(query)
             ret = curs.fetchone()
-            print(ret)
-
+            
             if len(ret) == 0:
                 render_template("login.html", status='failure')
+            elif not bcrypt.checkpw(password, ret[1].encode('utf-8')):
+                render_template("login.html", status='failure')
             else:
-                uid = ret[0]
-                return app.redirect(f'/index')
+                session["logged_in"] = True
+                session["uid"] = int(ret[0])
+
+                return app.redirect('/home')
         except (Exception, psycopg2.Error) as e:
-            print("Failed database connection, Error: ", e)
+            print("Error: ", e)
         finally:
             if conn:
                 curs.close()
@@ -148,7 +184,10 @@ def handle_signup():
             name.pop(0)
             lname = ' '.join(name)
             email = request.form["email"]
-            password = request.form["password"]
+            password = request.form["password"].encode('utf-8')
+
+            salt = bcrypt.gensalt()
+            password = bcrypt.hashpw(password, salt).decode("utf-8")
 
             insertval_auth = f"('{email}','{password}')"
 
@@ -160,8 +199,8 @@ def handle_signup():
                         port='5432')
                 
                 curs = conn.cursor()
-                curs.execute(f'insert into auth(email_id, pass) values {insertval_auth}')
-                curs.execute(f"select user_id from auth where email_id='{email}'")
+
+                curs.execute(f'insert into auth(email_id, pass) values {insertval_auth} returning user_id')
                 
                 uid = curs.fetchone()[0]
                 insertval_info = f"({uid},'{fname}','{lname}','{email}')"
@@ -170,6 +209,7 @@ def handle_signup():
                 conn.commit()
             except (Exception, psycopg2.Error) as e:
                 print("Failed to enter reg data into database, Error: ", e)
+                return app.redirect('/signup')
             finally:
                 if conn:
                     curs.close()
@@ -179,11 +219,7 @@ def handle_signup():
         
 @app.route("/stcks")
 def stcks():
-    return render_template("stcks.html")
-
-@app.route("/stcks", methods=["GET", "POST"])
-def getStcks():
-    query = "select * from market_data where company_id = 1;"
+    query = "select stock_date, close_price from market_data where company_id = 1 order by stock_date desc;"
 
     try:    
         conn = psycopg2.connect(database='stockmarket', 
@@ -193,7 +229,25 @@ def getStcks():
                                         port='5432')
         cursor = conn.cursor()
         cursor.execute(query)
-        return jsonify(cursor.fetchone()[0])
+        # return jsonify(cursor.fetchone()[0])
+        data = cursor.fetchmany(30)
+        labels = [i[0].strftime("%Y-%m-%d") for i in data]
+        vals = [i[1] for i in data]
+
+        data = [(labels[i], vals[i]) for i in range(30)]
+
+        cursor.execute(f"select pred_date, close_prediction from predictions where company_id=1 order by pred_date asc;")
+        pred = cursor.fetchmany(5)
+
+        pred_dates = [i[0].strftime("%Y-%m-%d") for i in pred]
+        pred_vals = [i[1] for i in pred]
+
+
     except(Exception) as error:
         print(error)
+    
+    return render_template("stcks.html", dates=labels, vals=vals, pred_dates=pred_dates, pred_vals=pred_vals)
+
+# @app.route("/stcks", methods=["GET", "POST"])
+# def getStcks():
 

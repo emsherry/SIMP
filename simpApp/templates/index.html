@@ -7,7 +7,9 @@
 	{% endblock loader %}
 
 	{% block content %}
-
+		
+	{{message}}
+	{{status}}
 	<!-- Hero section -->
 	<section class="hero-section">
 		<div class="container">
@@ -15,9 +17,9 @@
 				<div class="col-md-6 hero-text">
 					<h2>Invest in <span>Stocks</span> <br>Stock Investment Predictor</h2>
 					<h4>Use modern progressive technologies of Stocks to earn money</h4>
-					<form class="hero-subscribe-from">
-						<input type="text" placeholder="Enter your email">
-						<button class="site-btn sb-gradients">Get Started</button>
+					<form class="hero-subscribe-from" action="/newslettersignup" method="POST">
+						<input type="text" placeholder="Enter your email" name="email" id="email">
+						<button class="site-btn sb-gradients">Get Newsletter</button>
 					</form>
 				</div>
 				<div class="col-md-6">
