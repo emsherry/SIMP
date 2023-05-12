@@ -23,3 +23,12 @@ inner join
 select user_id
 from auth
 where email_id='{email}' and pass='{password}';
+
+
+
+
+
+select
+    *
+from company_information
+where company_name='{company_name}';
