@@ -25,6 +25,7 @@ create table company_information (
     date_established date not null,
     owner_name text not null,
     current_floating_stocks int not null check(current_floating_stocks>=0) default 0,
+    company_description text,
     last_updated date not null default now()
 );
 
