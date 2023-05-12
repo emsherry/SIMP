@@ -10,11 +10,7 @@ import bcrypt
 @app.route("/home", methods=["GET"])
 def handle_index():
     if request.method == "GET":
-        user = {
-            'uid': session.get("uid"),
-            'logged_in': session.get("logged_in"),
-        }
-        return render_template('index.html', user=user)
+        return render_template('index.html')
     
     
 @app.route("/home/<int:status>/<string:message>", methods=["GET"])
@@ -76,20 +72,12 @@ def handle_stocks():
         except:
             data = []
         finally:
-            user = {
-                'uid': session.get("uid"),
-                'logged_in': session.get("logged_in"),
-            }
-            return render_template("stocks.html", data=data, user=user)
+            return render_template("stocks.html", data=data)
 
 @app.route("/contact", methods=['GET', 'POST'])
 def handle_contact():
     if request.method == "GET":
-        user = {
-            'uid': session.get("uid"),
-            'logged_in': session.get("logged_in"),
-        }
-        return render_template("contact.html", user=user)
+        return render_template("contact.html")
     elif request.method == "POST":
         fname = request.form["fname"]
         lname = request.form["lname"]
@@ -123,7 +111,7 @@ def handle_contact():
 @app.route("/login", methods=["GET", "POST"])
 def handle_login():
     if request.method == "GET":
-        if not session.get("logged_in"):
+        if not session.get("uid"):
             return render_template("login.html")
         else:
             return redirect("/home")
@@ -153,7 +141,6 @@ def handle_login():
             elif not bcrypt.checkpw(password, ret[1].encode('utf-8')):
                 render_template("login.html", status='failure')
             else:
-                session["logged_in"] = True
                 session["uid"] = int(ret[0])
 
                 return app.redirect('/home')
@@ -169,7 +156,7 @@ def handle_login():
 @app.route("/signup", methods=["GET", "POST"])
 def handle_signup():
     if request.method == "GET":
-        if not session.get("logged_in"):
+        if not session.get("uid"):
             return render_template("reg.html")
         else:
             return redirect("/home")
@@ -216,6 +203,13 @@ def handle_signup():
                     conn.close()
 
             return app.redirect("/login")
+        
+@app.route("/logout", methods=["GET"])
+def handle_logout():
+    print(session)
+    session.pop('uid')
+    print(session)
+    return app.redirect('/home')
 
 @app.route("/stocks/<string:company_name>")
 def handle_company_stocks(company_name):
@@ -283,8 +277,4 @@ def handle_company_stocks(company_name):
         print("Error::", error)
         return "ERROR"
     finally:
-        user = {
-            'uid': session.get("uid"),
-            'logged_in': session.get("logged_in"),
-        }
-        return render_template("company_stocks.html", user=user, dates=labels, vals=vals, pred_dates=pred_dates, pred_vals=pred_vals)
+        return render_template("company_stocks.html", dates=labels, vals=vals, pred_dates=pred_dates, pred_vals=pred_vals)

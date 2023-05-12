@@ -34,7 +34,7 @@
 			</a>
 			<div class="responsive-bar"><i class="fa fa-bars"></i></div>
 			<a href="" class="user"><i class="fa fa-user"></i></a>
-			{% if user['logged_in'] == True %}
+			{% if session['uid'] %}
 				<a href="/details" class="site-btn">Your Account</a>
 				<a href="/logout" class="site-btn">Logout</a>
 			{%else%}

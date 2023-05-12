@@ -42,6 +42,48 @@ grant all on wallet_wallet_id_seq to admin;
 
 
 
+-- TRIGGERS
 
-insert into auth(email_id, pass) values
-('nigga@nigger.com', crypt('niglet', gen_salt('bf',8)));
+-- Create trigger for auth table
+CREATE OR REPLACE FUNCTION update_auth_last_updated()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.last_updated = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER auth_last_updated
+BEFORE UPDATE ON auth
+FOR EACH ROW
+EXECUTE FUNCTION update_auth_last_updated();
+
+
+-- Create trigger for user_info table
+CREATE OR REPLACE FUNCTION update_user_info_last_updated()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.last_updated = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER user_info_last_updated
+BEFORE UPDATE ON user_info
+FOR EACH ROW
+EXECUTE FUNCTION update_user_info_last_updated();
+
+
+-- Create trigger for wallet table
+CREATE OR REPLACE FUNCTION update_wallet_last_updated()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.last_updated = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER wallet_last_updated
+BEFORE UPDATE ON wallet
+FOR EACH ROW
+EXECUTE FUNCTION update_wallet_last_updated();

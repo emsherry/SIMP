@@ -65,4 +65,66 @@ grant all on stocks to admin;
 grant all on trades to admin;
 
 
-select company_name, company_reg, 
+
+-- triggers
+
+
+-- Create trigger for companies table
+CREATE OR REPLACE FUNCTION update_companies_last_updated()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.last_updated = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER companies_last_updated
+BEFORE UPDATE ON companies
+FOR EACH ROW
+EXECUTE FUNCTION update_companies_last_updated();
+
+
+-- Create trigger for company_information table
+CREATE OR REPLACE FUNCTION update_company_information_last_updated()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.last_updated = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER company_information_last_updated
+BEFORE UPDATE ON company_information
+FOR EACH ROW
+EXECUTE FUNCTION update_company_information_last_updated();
+
+
+-- Create trigger for news table
+CREATE OR REPLACE FUNCTION update_news_last_updated()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.last_updated = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER news_last_updated
+BEFORE UPDATE ON news
+FOR EACH ROW
+EXECUTE FUNCTION update_news_last_updated();
+
+
+-- Create trigger for market_data table
+CREATE OR REPLACE FUNCTION update_market_data_last_updated()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.last_updated = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER market_data_last_updated
+BEFORE UPDATE ON market_data
+FOR EACH ROW
+EXECUTE FUNCTION update_market_data_last_updated();
+
