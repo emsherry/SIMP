@@ -149,6 +149,14 @@ body {
   position: relative;
   margin: 0 auto; }
 
+.container-login {
+    width: 1400px;
+    position: relative;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
 .display-flex {
   justify-content: space-between;
   -moz-justify-content: space-between;
@@ -183,7 +191,13 @@ body {
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%); }
 
+.my-form-class {
+    width: 500px;
+    margin: 0 auto;
+}
+
 .signup-content {
+  margin-top: -90px;
   background: #fff;
   border-radius: 10px;
   -moz-border-radius: 10px;
