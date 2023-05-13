@@ -278,3 +278,9 @@ def handle_company_stocks(company_name):
         return "ERROR"
     finally:
         return render_template("company_stocks.html", dates=labels, vals=vals, pred_dates=pred_dates, pred_vals=pred_vals)
+
+
+
+@app.route('/details', methods=['GET'])
+def details():
+    return render_template("profile.html")
