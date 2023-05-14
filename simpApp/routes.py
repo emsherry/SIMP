@@ -283,4 +283,118 @@ def handle_company_stocks(company_name):
 
 @app.route('/details', methods=['GET'])
 def details():
-    return render_template("profile.html")
+    uid = session.get('uid')
+
+    if not uid:
+        return redirect('/home')
+
+    try:
+        query = f"""
+            select
+                first_name,
+                last_name,
+                email,
+                dob,
+                res_address,
+                auth.last_updated
+            from user_info
+            inner join auth on auth.user_id=user_info.user_id
+            where user_info.user_id={uid};
+        """
+        conn = psycopg2.connect(database='users', 
+                    user="admin", 
+                    password="simpingIsTheKeyToLife123",
+                    host="localhost",
+                    port='5432')
+        curs = conn.cursor()
+        curs.execute(query)
+        ret = curs.fetchone()
+
+        user = {
+            'first_name': ret[0],
+            'last_name': ret[1],
+            'email': ret[2],
+            'dob': ret[3],
+            'res_address': ret[4],
+            'pass_last_updated': ret[5]
+        }
+
+
+    except(Exception) as error:
+        print("Error:: ", error)
+    finally:
+
+        if(conn):
+            curs.close()
+            conn.close()
+
+        return render_template("profile.html", user=user)
+
+
+@app.route("/update-details/<string:type>", methods=["POST"])
+def update_details(type):
+
+    try:
+        uid = session.get('uid')
+
+        conn = psycopg2.connect(database='users', 
+                    user="admin", 
+                    password="simpingIsTheKeyToLife123",
+                    host="localhost",
+                    port='5432')
+
+        curs = conn.cursor()
+
+        if type == "account":
+            details = {
+                'first_name': request.form['first_name'],
+                'last_name': request.form['last_name'],
+                'email': request.form['email']
+            }
+
+            query = f"""
+                update user_info
+                set 
+                    first_name = '{details['first_name']}',
+                    last_name = '{details['last_name']}',
+                    email = '{details['email']}'
+                where user_id = {uid};
+            """
+            
+            curs.execute(query)
+
+        elif type == "password":
+            details = {
+                'old_password': request.form['old_password'],
+                'new_password': request.form['new_password'],
+                're_new_password': request.form['re_new_password']
+            }
+
+            if details['new_password'] != details['re_new_password']:
+                # flash('new passwords donot match')
+                print('new passwords donot match')
+                return redirect('/details')
+            else:
+
+                curs.execute(f"select pass from auth where user_id={uid};")
+                old_password = curs.fetchone()[0]
+                
+                if not bcrypt.checkpw(details['old_password'].encode('utf-8'), old_password.encode('utf-8')):
+                    # flash("You have not entered the correct old password")
+                    print("You have not entered the correct old password")
+                    return redirect('/details')
+                else:
+                    salt = bcrypt.gensalt()
+                    new_password = bcrypt.hashpw(details['new_password'].encode('utf-8'), salt).decode("utf-8")
+
+                    curs.execute(f"update auth set pass='{new_password}' where user_id={uid}")
+    except(Exception) as Error:
+        print('Error:: ', Error)
+    finally:
+
+        if(conn):
+            conn.commit()
+            curs.close()
+            conn.close()
+        
+        return app.redirect('/details')
