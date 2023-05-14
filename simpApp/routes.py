@@ -284,3 +284,4 @@ def handle_company_stocks(company_name):
 @app.route('/details', methods=['GET'])
 def details():
     return render_template("profile.html")
+

@@ -20,20 +20,36 @@
   </section>
   
 
-<!-- Charts section -->
-<section class="charts-section spad">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6">
-				<canvas id="worldwide-sales"></canvas>
+<!-- Sales Chart Start -->
+<div class="container-fluid pt-4 px-4">
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="bg-light rounded p-4">
+				<div class="d-flex justify-content-between align-items-center mb-3">
+					<h6 class="mb-0">Stocks</h6>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="stock-description">
+							<h6 class="mb-3">SHEEZAN</h6>
+							<p class="mb-1">SHZN</p>
+							<p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget lacinia tellus. Nullam euismod dolor at imperdiet semper.</p>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="col-lg-6">
-				<canvas id="salse-revenue"></canvas>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="bg-light text-center rounded p-4">
+				<div class="d-flex align-items-center justify-content-between mb-4">
+					<h6 class="mb-0">Prediction</h6>
+				</div>
+				<canvas id="sales-revenue"></canvas>
 			</div>
 		</div>
 	</div>
-</section>
-<!-- Charts section end -->
+</div>
+<!-- Chart Start -->
 
 {% endblock %}
 

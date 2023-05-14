@@ -496,6 +496,21 @@ ol {
 	background: url("../img/process-line.png") no-repeat scroll 0 0/cover;
 }
 
+
+.stock-description {
+	/* border-right: 1px solid #ddd; */
+	padding-right: 20px;
+  }
+  
+  .stock-description h6 {
+	font-size: 18px;
+	margin-bottom: 10px;
+  }
+  
+  .stock-description p {
+	font-size: 14px;
+	color: #666;
+  }
 /*---------------------
 	Fact Section
 -----------------------*/
