@@ -3,10 +3,9 @@
     {%block content%}
     <!-- Hero section -->
 	<section class="hero-section">
-		<div class="container-login">
-			<div class="row">
+		<div class="container">
+			<div class="login-content">
 				<div class="col-md-6">
-                    <div class="signup-content">
                         <form method="POST" id="signup-form" class="signup-form my-form-class" action="/login">
                             <h2 class="form-title">Enter Credentials</h2>
                             <div class="form-group">
@@ -22,11 +21,11 @@
                             {% if status == 'failure' %}
                                 <div style="color: red; text-align: center;">Invalid email / password</div>
                             {%endif%}
-                            </form>
-                        <p class="loginhere">
+                        </form>
+                        <p class="login-here">
                             Don't have an account ? <a href="/signup" class="loginhere-link">Sign Up here</a>
                         </p>
-                    </div>
+                  
 				</div>
 			</div>
 		</div>

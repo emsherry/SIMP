@@ -195,7 +195,15 @@ body {
     width: 500px;
     margin: 0 auto;
 }
-
+.login-content {
+  margin-top: -90px;
+  background: #fff;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  padding: 30px 50px; }
 .signup-content {
   margin-top: -90px;
   background: #fff;
