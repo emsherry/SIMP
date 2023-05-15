@@ -1,12 +1,14 @@
 select
     company_name,
-    f.change
+    f.change,
+    f.stock_date
 from company_information
 inner join 
 (
     select 
         market_data.company_id,
-        change
+        change,
+        f.stock_date
     from market_data
     inner join (
         select 

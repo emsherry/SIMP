@@ -46,6 +46,11 @@ create table news (
     last_updated date not null default now()
 );
 
+create table predictions (
+  company_id int references companies(company_id) not null,
+  pred_date date not null,
+  close_prediction double precision not null
+)
 
 
 create table market_data(

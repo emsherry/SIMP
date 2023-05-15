@@ -9,7 +9,7 @@ from tensorflow.keras.layers import Dense, Dropout, LSTM
 # load data
 company = "SHEZ"
 
-data = pd.read_csv("SHEZ.csv", index_col="Date", parse_dates=True)
+data = pd.read_csv("../StockDatasets/SHEZ.csv", index_col="Date", parse_dates=True)
 print(data.head())
 
 # Prepare data
@@ -52,7 +52,7 @@ model.compile(optimizer="adam", loss="mean_squared_error")
 model.fit(X_train, Y_train, epochs=50, batch_size=32)
 
 ###TEST###
-test_data = pd.read_csv("SHEZ.csv", index_col="Date", parse_dates=True)
+test_data = pd.read_csv("../StockDatasets/SHEZ.csv", index_col="Date", parse_dates=True)
 actual_prices = test_data["Close"].values
 
 total_Data = pd.concat((data["Close"], test_data["Close"]), axis=0)
