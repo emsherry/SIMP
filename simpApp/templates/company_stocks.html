@@ -1,38 +1,124 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<section class="hero-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 hero-text">
-          <h2>Invest in <span>Stocks</span> <br>Stock Investment Predictor</h2>
-          <h4>Use modern progressive technologies of Stocks to earn money</h4>
-          <form class="hero-subscribe-from">
-            <input type="text" placeholder="Enter your email">
-            <button class="site-btn sb-gradients">Get Started</button>
-          </form>
-        </div>
-        <div class="col-md-6">
-          <img src="{{url_for('static',filename='img/laptop.png')}}" class="laptop-image" alt="">
-        </div>
-      </div>
-    </div>
-  </section>
-  
-
-<!-- Charts section -->
-<section class="charts-section spad">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6">
-				<canvas id="worldwide-sales"></canvas>
+    <!-- Hero section -->
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 hero-text">
+					<h2>Invest in <span>Stocks</span>Stock Investment Predictor</h2>
+				</div>
 			</div>
-			<div class="col-lg-6">
-				<canvas id="salse-revenue"></canvas>
+		</div>
+	</section>
+	<!-- Hero section end -->
+  
+<!-- Sales Chart Start -->
+<div class="container-fluid pt-4 px-4 mt-4">
+	<div class="row">
+		<div class="col-sm-12 col-md-8">
+			<div class="bg-light rounded p-4">
+				<div class="d-flex justify-content-between align-items-center mb-3">
+					<h4 class="mb-0">Stock Analysis</h4>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="stock-description">
+							<h3 class="mb-1">{{company['name']}}</h3>
+						</div>
+					</div>
+				</div>
+
+				<div class="charts-section spad" style="width: 100%;">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-lg-12">
+								<canvas id="salse-revenue"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+			<div class="bg-light rounded p-4 mt-4 ">
+				<h3 class="mb-4">Company Description</h3>
+				<p style="font-size: 1.2rem;">{{company['description']}}</p>
+			</div>
+
+			<div class="bg-light rounded p-4 mt-4 ">
+				<h3 class="mb-4">Previous Company stocks</h3>
+
+				<div>
+					<table id="dip-body" class="display table table-striped" style="width:100%; font-size: 1rem;">
+						<thead class="thead-light">
+							<tr style="font-weight: bold;">
+								<th scope="col">Date</th>
+								<th scope="col">Close price</th>
+							</tr>
+						</thead>
+						<tbody>
+								{% for row in prev_data %}
+								<tr>
+									<td>{{ row[0] }}</td>
+									{% if row[1]>=0 %}
+									<td style="color: green;">{{ row[1] }}</td>
+									{%else%}
+									<td style="color: red;">{{ row[1] }}</td>
+									{%endif%}
+								</tr>
+								{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-4">
+			<div class="bg-light text-center rounded p-4">
+				<div class="d-flex align-items-center justify-content-between mb-4">
+					<h4>Economical Index:</h4>
+					{% if news['score'] <= -0.25 %}
+					<span><h1 style="color:red">{{news['score']}}</h1></span>
+					{%elif news['score'] <= 0.25 %}
+					<span><h1 style="color:orange">{{news['score']}}</h1></span>
+					{%else %}
+					<span><h1 style="color:green">{{news['score']}}</h1></span>
+					{%endif%}
+				</div>
+
+				<div>
+					<table id="dip-body" class="display table table-striped" style="width:100%; font-size: 1rem;">
+						<thead class="thead-light">
+							<tr style="font-weight: bold;">
+								<th scope="col">News title</th>
+								<th scope="col">Score</th>
+							</tr>
+						</thead>
+						<tbody>
+								{% for row in news['news'] %}
+								<tr onclick="window.location ='{{row[2]}}'">
+									<td>{{ row[0] }}</td>
+									{% if row[1]>=0 %}
+									<td style="color: green;">{{ row[1] }}</td>
+									{%else%}
+									<td style="color: red;">{{ row[1] }}</td>
+									{%endif%}
+								</tr>
+								{% endfor %}
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-</section>
+</div>
+<!-- Chart Start -->
+
+
+<!-- Charts section -->
+
 <!-- Charts section end -->
 
 {% endblock %}
@@ -76,6 +162,12 @@
 
 	// Salse & Revenue Chart
 	var ctx2 = $("#salse-revenue").get(0).getContext("2d");
+
+	// var canvas = document.getElementById('salse-revenue');
+	// canvas.width = 2000; // set the canvas width to 800 pixels
+	// canvas.height = 800; // set the canvas height to 600 pixels
+
+
 	var myChart2 = new Chart(ctx2, {
 		type: "line",
 		data: {
@@ -95,7 +187,20 @@
 			]
 		},
 		options: {
-			responsive: true
+			responsive: true,
+			scales: {
+				xAxes: [{
+					ticks: {
+						display: true,
+						stepSize: 12
+					}
+				}],
+				yAxes: [{
+					ticks: {
+						beginAtZero: false
+					}
+				}]
+			}
 		}
 	});
 </script>

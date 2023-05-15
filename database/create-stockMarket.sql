@@ -40,10 +40,13 @@ create table company_information (
 create table news (
     news_id serial primary key,
     company_id int not null references companies(company_id),
-    sentiment text not null,
+    sentiment_title text not null,
+    link text not null,
     sentiment_score double precision not null default 0,
     last_updated date not null default now()
 );
+
+
 
 create table market_data(
     company_id int not null references companies(company_id),

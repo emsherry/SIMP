@@ -57,6 +57,8 @@ with open('scrapes.csv', 'w', newline='', encoding='utf-8') as csvfile:
     for data in scraped_data:
         writer.writerow([data[0], data[1], data[2]])
 
+        print(data[0]+';'+data[1]+';'+str(data[2]))
+
 
 def eliminatezeros():
     filename = 'scrapes.csv'

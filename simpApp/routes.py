@@ -219,7 +219,8 @@ def handle_company_stocks(company_name):
             company_reg,
             date_established,
             owner_name,
-            current_floating_stocks
+            current_floating_stocks,
+            company_description as desc
         from company_information
         where company_name='{company_name}';
     """
@@ -242,6 +243,15 @@ def handle_company_stocks(company_name):
         order by pred_date asc;
     """
 
+    query_company_news = """
+        select
+            sentiment_title,
+            ROUND(sentiment_score::numeric, 2) as sentiment_score,
+            link
+        from news
+        where company_id=1 and sentiment_score!=0;
+    """ 
+
     try:
         conn = psycopg2.connect(database='stockmarket', 
                                         user="admin", 
@@ -254,18 +264,32 @@ def handle_company_stocks(company_name):
         data = cursor.fetchone()
         company_info = {
             'company_id': data[0],
-            'company_name': company_name,
+            'name': company_name,
             'company_reg': data[1],
             'date_established': data[2],
             'owner_name': data[3],
-            'current_floating_stocks': data[4]
+            'current_floating_stocks': data[4],
+            'description': data[5]
+        }
+
+        cursor.execute(query_company_news)
+        data = cursor.fetchall()
+
+        score = 0
+        for i in data:
+            score += i[1]
+        score = score / len(data)
+        
+        news = {
+            'news': data,
+            'score': round(score, 2)
         }
 
 
         cursor.execute(query_company_stocks.format(company_id=company_info['company_id']))
-        data = cursor.fetchmany(30)
-        labels = [i[0].strftime("%Y-%m-%d") for i in data]
-        vals = [i[1] for i in data]
+        prev_data = cursor.fetchmany(30)
+        labels = [i[0].strftime("%Y-%m-%d") for i in prev_data]
+        vals = [i[1] for i in prev_data]
 
         cursor.execute(query_prediction_data.format(company_id=company_info['company_id']))
         data = cursor.fetchmany(5)
@@ -277,7 +301,7 @@ def handle_company_stocks(company_name):
         print("Error::", error)
         return "ERROR"
     finally:
-        return render_template("company_stocks.html", dates=labels, vals=vals, pred_dates=pred_dates, pred_vals=pred_vals)
+        return render_template("company_stocks.html", dates=labels, vals=vals, pred_dates=pred_dates, pred_vals=pred_vals, company=company_info, news=news, prev_data=prev_data)
 
 
 
