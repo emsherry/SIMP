@@ -213,6 +213,9 @@ def handle_logout():
 
 @app.route("/stocks/<string:company_name>")
 def handle_company_stocks(company_name):
+
+    query_isadded = "select * from watchlist where user_id={uid} and company_id={cid};"
+
     query_company_information = f"""
         select
             company_id,
@@ -290,6 +293,13 @@ def handle_company_stocks(company_name):
             'score': round(score, 2)
         }
 
+        is_added = 0
+        if session.get('uid'):
+            cursor.execute(query_isadded.format(uid=session.get('uid'), cid=company_info['company_id']))
+            added = cursor.fetchall()
+            if added:
+                is_added = 1
+
 
         cursor.execute(query_company_stocks.format(company_id=company_info['company_id']))
         prev_data = cursor.fetchmany(30)
@@ -306,7 +316,7 @@ def handle_company_stocks(company_name):
         print("Error::", error)
         return "ERROR"
     finally:
-        return render_template("company_stocks.html", dates=labels, vals=vals, pred_dates=pred_dates, pred_vals=pred_vals, company=company_info, news=news, prev_data=prev_data)
+        return render_template("company_stocks.html", dates=labels, vals=vals, pred_dates=pred_dates, pred_vals=pred_vals, company=company_info, news=news, prev_data=prev_data, is_added=is_added)
 
 
 
@@ -330,14 +340,56 @@ def details():
             inner join auth on auth.user_id=user_info.user_id
             where user_info.user_id={uid};
         """
+
+        query_watchlist_company = """
+            select
+                company_name,
+                f.close_price,
+                f.change,
+                f.company_id
+            from company_information
+            inner join
+            (
+                select
+                    market_data.company_id,
+                    close_price,
+                    change
+                from market_data
+                inner join (
+                    select
+                        company_id
+                    from watchlist
+                    where user_id={uid}
+                ) as g on g.company_id=market_data.company_id
+                inner join (
+                    select
+                        max(stock_date) as stock_date,
+                        company_id
+                    from market_data
+                    group by company_id
+                ) as f on
+                    f.company_id=market_data.company_id and f.stock_date=market_data.stock_date
+            ) as f on
+                f.company_id = company_information.company_id;
+        """
+        
         conn = psycopg2.connect(database='users', 
                     user="admin", 
                     password="simpingIsTheKeyToLife123",
                     host="localhost",
                     port='5432')
+        
+        stock_conn = psycopg2.connect(database='stockmarket', 
+                    user="admin", 
+                    password="simpingIsTheKeyToLife123",
+                    host="localhost",
+                    port='5432')
+
         curs = conn.cursor()
         curs.execute(query)
         ret = curs.fetchone()
+        curs.close()
+        conn.close()
 
         user = {
             'first_name': ret[0],
@@ -348,6 +400,11 @@ def details():
             'pass_last_updated': ret[5]
         }
 
+        stock_curs = stock_conn.cursor()
+        stock_curs.execute(query_watchlist_company.format(uid=session.get("uid")))
+        user_watchlist = stock_curs.fetchall()
+        print(user_watchlist)
+        print(session.get("uid"))
 
     except(Exception) as error:
         print("Error:: ", error)
@@ -357,7 +414,7 @@ def details():
             curs.close()
             conn.close()
 
-        return render_template("profile.html", user=user)
+        return render_template("profile.html", user=user, data=user_watchlist, watchlist=0)
 
 
 @app.route("/update-details/<string:type>", methods=["POST"])
@@ -427,3 +484,49 @@ def update_details(type):
             conn.close()
         
         return app.redirect('/details')
+    
+@app.route('/watchlist-remove', methods=["POST"])
+def handle_removewatchlist():
+    query = """
+        delete from watchlist where company_id={cid} and user_id={uid};
+    """
+
+    try:
+        conn = psycopg2.connect(database='stockmarket', 
+                                user="admin", 
+                                password="simpingIsTheKeyToLife123",
+                                host="localhost",
+                                port='5432')
+        curs = conn.cursor()
+        curs.execute(query.format(cid=request.form['c_id'], uid=session.get('uid')))
+    except(Exception) as error:
+        print("Error:: ", error)
+    finally:
+        if(conn):
+            conn.commit()
+            curs.close()
+            conn.close()
+        return app.redirect(request.form["redirect_url"])
+    
+@app.route('/watchlist-add', methods=['POST'])
+def handle_addwatchlist():
+    query = """
+        insert into watchlist values ({cid}, {uid});
+    """
+
+    try:
+        conn = psycopg2.connect(database='stockmarket', 
+                                user="admin", 
+                                password="simpingIsTheKeyToLife123",
+                                host="localhost",
+                                port='5432')
+        curs = conn.cursor()
+        curs.execute(query.format(cid=request.form['c_id'], uid=session.get('uid')))
+    except(Exception) as error:
+        print("Error:: ", error)
+    finally:
+        if(conn):
+            conn.commit()
+            curs.close()
+            conn.close()
+        return app.redirect(request.form['redirect_url'])

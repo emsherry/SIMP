@@ -27,12 +27,13 @@
                                             <th scope="col">Company Name</th>
                                             <th scope="col"></th>
                                             <th scope="col">Change</th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                             {% for row in data %}
                                             <tr onclick="window.location ='/stocks/{{ row[0] }}'">
-                                                <td>{{ 0 }}</td>
+                                                <td></td>
                                                 <td>{{ row[0] }}</td>
                                                 {% if row[1]>=0 %}
                                                 <td><img src="{{url_for('static', filename='img/increase.png')}}" alt="" height="40"></td>
@@ -45,6 +46,7 @@
                                             {% endfor %}
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     {% else %}

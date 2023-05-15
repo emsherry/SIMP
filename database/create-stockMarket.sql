@@ -59,6 +59,11 @@ create table market_data(
     change double precision not null
 );
 
+create table watchlist(
+  company_id int references companies(company_id) not null,
+  user_id int not null
+);
+
 
 create user admin with password 'simpingIsTheKeyToLife123';
 grant all on companies to admin;
@@ -67,6 +72,7 @@ grant all on market_data to admin;
 grant all on news to admin;
 grant all on stocks to admin;
 grant all on trades to admin;
+grant all on watchlist to admin;
 
 
 

@@ -1,24 +1,59 @@
 {% extends 'layout.html' %}
 
+{% block loader %}
+<!-- Page Preloder -->
+<div id="preloder">
+	<div class="loader"></div>
+</div>	
+{% endblock loader %}
+
 {% block content %}
-    <!-- Hero section -->
-	<section class="hero-section">
+	<!-- Page info section -->
+	<section class="page-info-section">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-6 hero-text">
-					<h2>Invest in <span>Stocks</span>Stock Investment Predictor</h2>
-				</div>
-			</div>
+
 		</div>
 	</section>
-	<!-- Hero section end -->
+	<!-- Page info end -->
+
 <!-- Sales Chart Start -->
 <div class="container-fluid pt-4 px-4 mt-4">
 	<div class="row">
 		<div class="col-sm-12 col-md-8">
 			<div class="bg-light rounded p-4">
+				{%if session['uid']%}
+				<div class="" style="float: right;">
+					{%if is_added == 0%}
+					<form action="/watchlist-add" method="POST">
+						<input type="hidden" value="{{request.path}}" name="redirect_url" id="redirect_url">
+						<input type="hidden" value="{{company['company_id']}}" name="c_id" id="c_id">
+						<div class="stock-description" onclick="form.submit()">
+							<button class="Btn" onclick="">
+	  
+								<div class="sign">+</div>
+								
+								<div class="text pl-2">Add</div>
+							</button>
+						</div>
+					</form>
+					{%else%}
+					<form action="/watchlist-remove" method="POST">
+						<input type="hidden" value="{{request.path}}" name="redirect_url" id="redirect_url">
+						<input type="hidden" value="{{company['company_id']}}" name="c_id" id="c_id">
+						<div class="stock-description" onclick="form.submit()">
+							<button class="Btn" onclick="">
+	  
+								<div class="sign" style="font-size: 20px; padding-bottom: 5px;">X</div>
+								
+								<div class="text pl-2">Remove</div>
+							</button>
+						</div>
+					</form>
+					{%endif%}
+				</div>
+				{%endif%}
 				<div class="d-flex justify-content-between align-items-center mb-3">
-					<h4 class="mb-0">Stock Analysis</h4>
+					<h2 class="fadeInLeft">Stock Analysis</h2>
 				</div>
 				<div class="row">
 					<div class="col-md-6">

@@ -13,13 +13,29 @@
 						<h4 class="text-center">{{user['first_name']}} {{user['last_name']}}</h4>
 					</div>
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						{%if not watchlist %}
+						<a class="nav-link" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
+						{%else%}
 						<a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
+						{%endif%}
 							<i class="fa fa-home text-center mr-1"></i> 
 							Account
 						</a>
 						<a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
 							<i class="fa fa-key text-center mr-1"></i> 
 							Password
+						</a>
+						<a class="nav-link" id="wallet-tab" data-toggle="pill" href="#wallet" role="tab" aria-controls="password" aria-selected="false">
+							<i class="ti-wallet text-center mr-1"></i>
+							 Wallet
+						</a>
+						{%if watchlist %}
+						<a class="nav-link active" id="watchlist-tab" data-toggle="pill" href="#watchlist" role="tab" aria-controls="password" aria-selected="false">
+						{%else%}
+						<a class="nav-link" id="watchlist-tab" data-toggle="pill" href="#watchlist" role="tab" aria-controls="password" aria-selected="false">
+						{%endif%}
+							<i class="ti-wallet text-center mr-1"></i>
+							Watchlist
 						</a>
 
 					</div>
@@ -53,43 +69,96 @@
 							</div>
 						</form>
 					</div>
-					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-							<form action="/update-details/password" method="POST">
-							<h3 class="mb-4">Password Settings</h3>
+					<div class="tab-pane fade" id="wallet" role="tabpanel" aria-labelledby="wallet-tab">
+							<h3 class="mb-4">Wallet Settings</h3>
 							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										  <label>Old password</label>
-										  <input type="password" class="form-control" id="old_password" name="old_password">
-									</div>
+								<div class="col-md-12">
+									<h4>Sorry this feature is unavailable at the moment...</h4>
+									<h4>Please come back another time.</h4>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										  <label>New password</label>
-										  <input type="password" class="form-control" id="new_password" name="new_password">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										  <label>Confirm new password</label>
-										  <input type="password" class="form-control" id="re_new_password" name="re_new_password">
-									</div>
-								</div>
-							</div>
-							<div>
-								<button class="btn btn-primary" onclick="form.submit()">Update</button>
-							</div>
-							<div>
-								{% with messages = get_flashed_messages() %}
-									{% if messages %}
-										<li style="color:red; text-align: center;">{{message[0]}}</li>
-									{% endif %}
-								{% endwith %}
-							</div>
-						</form>
 					</div>
+					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+						<form action="/update-details/password" method="POST">
+						<h3 class="mb-4">Password Settings</h3>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									  <label>Old password</label>
+									  <input type="password" class="form-control" id="old_password" name="old_password">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									  <label>New password</label>
+									  <input type="password" class="form-control" id="new_password" name="new_password">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									  <label>Confirm new password</label>
+									  <input type="password" class="form-control" id="re_new_password" name="re_new_password">
+								</div>
+							</div>
+						</div>
+						<div>
+							<button class="btn btn-primary" onclick="form.submit()">Update</button>
+						</div>
+						<div>
+							{% with messages = get_flashed_messages() %}
+								{% if messages %}
+									<li style="color:red; text-align: center;">{{message[0]}}</li>
+								{% endif %}
+							{% endwith %}
+						</div>
+					</form>
+				</div>
+				<div class="tab-pane fade" id="watchlist" role="tabpanel" aria-labelledby="watchlist-tab">
+					<h3 class="mb-4">Watch List</h3>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="container">
+								<div class="data-table-container diptable">
+									<table id="dip-body" class="display table table-striped" style="width:100%; font-size: 1rem;">
+										<thead class="thead-light">
+											<tr style="font-weight: bold;">
+												<th scope="col"></th>
+												<th scope="col">Company Name</th>
+												<th scope="col">Close</th>
+												<th scope="col"></th>
+												<th class="h-100" scope="col">Change</th>
+												<th scope="col"></th>
+											</tr>
+										</thead>
+										<tbody>
+												{% for row in data %}
+												<tr>
+													<form action="/watchlist-remove" method="POST">
+														<input type="hidden" value="{{request.path}}" name="redirect_url" id="redirect_url">
+														<input type="hidden" value="{{row[3]}}" name="c_id" id="c_id">
+														<td></td>
+														<td>{{ row[0] }}</td>
+														<td>{{ row[1] }}</td>
+														{% if row[2]>=0 %}
+														<td><img src="{{url_for('static', filename='img/increase.png')}}" alt="" height="40"></td>
+														<td style="color: green;">{{ row[2] }}</td>
+														{%else%}
+														<td><img src="{{url_for('static', filename='img/decrease.png')}}" alt="" height="40"></td>
+														<td style="color: red;">{{ row[2] }}</td>
+														{%endif%}
+														<td><button onclick="form.submit()" style="background-color: transparent; border: none; font-size: 1.5rem; font-weight: bold; color: #333; cursor: pointer;" onmouseover="this.style.color='#f00';" onmouseout="this.style.color='#333';">&times;</button></td>														</td>
+													</form>
+												</tr>
+												{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				</div>
 			</div>
 		</div>
