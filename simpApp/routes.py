@@ -228,7 +228,12 @@ def handle_company_stocks(company_name):
     query_company_stocks = """
         select
             stock_date,
-            close_price
+            close_price,
+            open_price,
+            high_price,
+            low_price,
+            volume,
+            change
         from market_data
         where company_id={company_id}
         order by stock_date desc;

@@ -12,7 +12,6 @@
 		</div>
 	</section>
 	<!-- Hero section end -->
-  
 <!-- Sales Chart Start -->
 <div class="container-fluid pt-4 px-4 mt-4">
 	<div class="row">
@@ -56,17 +55,27 @@
 						<thead class="thead-light">
 							<tr style="font-weight: bold;">
 								<th scope="col">Date</th>
-								<th scope="col">Close price</th>
+								<th scope="col">Open</th>
+								<th scope="col">High</th>
+								<th scope="col">Low</th>
+								<th scope="col">Close</th>
+								<th scope="col">Volume</th>
+								<th scope="col">Change</th>
 							</tr>
 						</thead>
 						<tbody>
 								{% for row in prev_data %}
 								<tr>
 									<td>{{ row[0] }}</td>
-									{% if row[1]>=0 %}
-									<td style="color: green;">{{ row[1] }}</td>
+									<td>{{ row[2] }}</td>
+									<td>{{ row[3] }}</td>
+									<td>{{ row[4] }}</td>
+									<td>{{ row[1] }}</td>
+									<td>{{ row[5] }}</td>
+									{% if row[6]>=0 %}
+									<td style="color: green;">{{ row[6] }}</td>
 									{%else%}
-									<td style="color: red;">{{ row[1] }}</td>
+									<td style="color: red;">{{ row[6] }}</td>
 									{%endif%}
 								</tr>
 								{% endfor %}
